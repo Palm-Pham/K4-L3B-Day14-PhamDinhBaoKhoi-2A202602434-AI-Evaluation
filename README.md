@@ -36,17 +36,22 @@ Hạn nộp mặc định: **23h59 ngày lab (GMT+7)**; coach có thể gia hạ
 
 ## Yêu cầu & Quick Start
 
-**Yêu cầu:** Python 3.11 trở lên. Cần **OpenAI API key** để chạy `domain_assistant.py` (Part 3 — sinh 20 actual answers từ RAG thật); phần code core (`template.py`, Part 1–2) không cần API key.
+**Yêu cầu:** Python 3.11 trở lên. Cần **OpenRouter API key** để chạy `domain_assistant.py` (Part 3 — sinh 20 actual answers từ RAG thật); phần code core (`template.py`, Part 1–2) không cần API key.
 
 ```bash
 python --version                                        # xác nhận Python 3.11+
 python -m venv .venv && source .venv/bin/activate       # Windows: .venv\Scripts\Activate.ps1
 python -m pip install -r requirements.txt
 pytest tests/ -v                                         # baseline: 42 tests collected, 42 failed
-cp .env.example .env                                     # điền OPENAI_API_KEY (chỉ cần cho Part 3)
+cp .env.example .env                                     # điền OPENROUTER_API_KEY (chỉ cần cho Part 3)
 ```
 
 Chi tiết hướng dẫn theo hệ điều hành và xử lý lỗi: xem [`guide_lab.md`](guide_lab.md).
+
+Tạo key tại [OpenRouter](https://openrouter.ai/settings/keys), điền
+`OPENROUTER_API_KEY` và chọn `OPENROUTER_MODEL` theo dạng `provider/model`
+(ví dụ `openai/gpt-4o-mini`, có tính phí). Package `openai` vẫn được dùng làm
+SDK tương thích, nhưng requests được gửi đến OpenRouter.
 
 ---
 
