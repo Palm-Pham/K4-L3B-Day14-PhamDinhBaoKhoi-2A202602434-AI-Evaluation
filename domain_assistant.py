@@ -243,18 +243,18 @@ class TextGenerator(Protocol):
 
 
 class OpenAIGenerator:
-    """Generate through OpenRouter using the OpenAI-compatible SDK."""
+    """Generate through Gemini using Google's OpenAI-compatible endpoint."""
 
     def __init__(self, max_output_tokens: int = 300) -> None:
-        api_key = os.getenv("OPENROUTER_API_KEY", "").strip()
-        self.model = os.getenv("OPENROUTER_MODEL", "").strip()
+        api_key = os.getenv("GEMINI_API_KEY", "").strip()
+        self.model = os.getenv("GEMINI_MODEL", "").strip()
         if not api_key:
-            raise RuntimeError("OPENROUTER_API_KEY is missing from .env")
+            raise RuntimeError("GEMINI_API_KEY is missing from .env")
         if not self.model:
-            raise RuntimeError("OPENROUTER_MODEL is missing from .env")
+            raise RuntimeError("GEMINI_MODEL is missing from .env")
         self.client = OpenAI(
             api_key=api_key,
-            base_url="https://openrouter.ai/api/v1",
+            base_url="https://generativelanguage.googleapis.com/v1beta/openai/",
         )
         self.max_output_tokens = max_output_tokens
 
@@ -271,7 +271,7 @@ class OpenAIGenerator:
             else ""
         )
         if not answer:
-            raise RuntimeError("OpenRouter returned an empty answer")
+            raise RuntimeError("Gemini returned an empty answer")
         return answer
 
 
